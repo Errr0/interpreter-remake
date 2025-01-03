@@ -1,8 +1,3 @@
-def a(x=1){
-    x++;
-}
-"Hello world!";
-z="World hello!";
-e = 4;
-a(2);
-//e = a(e);
+a = "abc";
+//sdasd
+b /*dadsffw;;;;*/ = 'f';

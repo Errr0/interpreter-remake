@@ -18,7 +18,7 @@ void addNumberToken(std::string str, std::vector<Token> &tokens){
 
 void addMinus(std::vector<Token> &tokens){
     if(!tokens.empty()){
-        if(tokens.back().type == OPERATOR || tokens.back().type == ASSIGN){
+        if(tokens.back().type == ARITMETIC_OPERATOR || tokens.back().type == ASSIGN){
             tokens.push_back(Token("0", INT));
         }
         tokens.push_back(locked["~MINUS"]);
@@ -55,7 +55,7 @@ void addIdentifier(std::string str, std::vector<Token> &tokens){
             if(tokens.back().type == KEYWORD){
                 if(tokens.back().value == "def"){
                     tokens.pop_back();
-                    tokens.push_back(Token(str,FUNCTION, -1));
+                    tokens.push_back(Token(str,FUNCTION_DECLARATION, -1));
                     return;
                 } else if(tokens.back().value == "class"){
                     tokens.pop_back();
@@ -72,7 +72,7 @@ void tokenize(std::vector<std::string> arr, std::vector<Token> &tokens){
     for (std::string str : arr) {
         if(str[0]=='~'){
             if(str=="~STRING"){
-                tokens.push_back(Token(StringsLiterals.front()));
+                tokens.push_back(Token(StringsLiterals.front(), STRING));
                 StringsLiterals.pop();
             } else if(str=="~INCREMENT"){
                 int temp = tokens.size()-1;
@@ -113,7 +113,7 @@ void tokenize(std::vector<std::string> arr, std::vector<Token> &tokens){
 
 void print(std::vector<Token> &tokens){
     for(Token token : tokens){
-        std::cout << token.value << displayTokenType(token.type);//<< "|" << token.weight << "|";
+        std::cout << token.value << displayType(token.type);//<< "|" << token.weight << "|";
     }
     std::cout<<"\n";
 }

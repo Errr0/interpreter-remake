@@ -12,14 +12,12 @@ int numberOfOcurrences(std::string str, std::string substr){
     return count;
 }
 
-bool eraseBetween(std::string& str, const std::string& start, const std::string& end) {
+void eraseBetween(std::string& str, const std::string& start, const std::string& end) {
     size_t startPos = str.find(start);  // Find the starting substring
     size_t endPos = str.find(end, startPos);  // Find the ending substring after the start
     if (startPos != std::string::npos && endPos != std::string::npos) {
         str.erase(startPos, (endPos + end.length()) - startPos);
-        return true;
     }
-    return false;
 } 
 
 std::string replaceBetween(std::string& str, const std::string& start, const std::string& end, const std::string& replacement) {
@@ -31,7 +29,7 @@ std::string replaceBetween(std::string& str, const std::string& start, const std
 
         if (endPos != std::string::npos) {
             // Extract the replaced part
-            replacedPart = str.substr(startPos + start.length(), (endPos) - startPos - start.length());
+            replacedPart = str.substr(startPos, (endPos + end.length()) - startPos);
             // Replace the part from startPos to the end of end with the replacement string
             str.replace(startPos, (endPos + end.length()) - startPos, replacement);
         }

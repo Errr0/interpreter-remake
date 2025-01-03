@@ -19,8 +19,10 @@ int main(int argc, char* argv[]){
         return 1;
     }
     std::string code;
-    if(!readfile(argv[1], code)) return 2;
-    interpreter(code);
+    if(!readfile(argv[1], code)) {
+        std::cerr << "Error failed to read file!" << std::endl;
+        return 2;
+    }
+    interpreter interpreter(code);
     return 0;
 }
-
